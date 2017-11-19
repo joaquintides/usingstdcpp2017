@@ -15,4 +15,14 @@ for three polymorphism models:
   * `boost::function_collection` for callable entities in the spirit of `std::function`
   * `boost::any_collection` for *duck typing* as implemented by [Boost.TypeErasure](http://boost.org/libs/type_erasure).
 
-* C++17 vocabulary types: *abstract to come.*
+* C++17 vocabulary types: Vocabulary types are the basic building blocks of any program and also serve
+as an effective tool for communicating the program intent when others read the code. C++17 features four new
+vocabulary types:
+
+  * `std::string_view`
+  * `std::any`
+  * `std::optional`
+  * `std::variant`
+ 
+   We briefly describe these types and use some of them in an example that shows their power when
+combined together.
