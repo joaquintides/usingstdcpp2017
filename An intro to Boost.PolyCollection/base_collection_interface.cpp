@@ -87,7 +87,7 @@ int main()
 
   // Segments can be targeted individually
 
-  std::sort( // sort warriors in ascending id order
+  std::sort( // sort warriors in descending id order
     c.begin<warrior>(),c.end<warrior>(),
     [](const warrior& x,const warrior& y){return x.id>y.id;});
 
