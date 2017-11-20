@@ -16,14 +16,6 @@
 #include <utility>
 #include <variant>
 
-void print(const std::string&);
-template<typename T>
-void print(const std::optional<T>&);
-template<typename... Ts>
-void print(const std::variant<Ts...>&);
-template<typename... Ts>
-void print(const std::tuple<Ts...>&);
-
 void print(const std::string& str){std::cout<<str<<" ";}
 
 template<typename T>
@@ -154,11 +146,10 @@ std::variant<Ts...> get(
 {
   using return_type=std::variant<Ts...>;
   using get_function=return_type(*)(URBG&&);
-  std::array<get_function,sizeof...(Ts)> table={{
+  static const std::array<get_function,sizeof...(Ts)> a={{
     &variant_get<return_type,URBG,Ts>...
   }};
-  std::uniform_int_distribution<> rnd(0,sizeof...(Ts)-1);
-  return table[rnd(gen)](std::forward<URBG>(gen));
+  return get_from(a,std::forward<URBG>(gen))(std::forward<URBG>(gen));
 }
 
 template<typename Tuple,typename URBG,std::size_t... I>
