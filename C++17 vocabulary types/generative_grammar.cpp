@@ -25,13 +25,9 @@ template<typename... Ts>
 void print(const std::variant<Ts...>& v)
 {std::visit([](const auto& x){print(x);},v);}
 
-template<typename... Ts,std::size_t... I>
-void print(const std::tuple<Ts...>& t,std::index_sequence<I...>)
-{int l[]={0,(print(std::get<I>(t)),0)...};(void)l;}
-
 template<typename... Ts>
 void print(const std::tuple<Ts...>& t)
-{print(t,std::make_index_sequence<sizeof...(Ts)>{});}
+{std::apply([](const auto&... x){int l[]={0,(print(x),0)...};(void)l;},t);}
 
 struct proper_noun:std::string{using std::string::string;};
 struct article:std::string{using std::string::string;};
@@ -152,21 +148,11 @@ std::variant<Ts...> get(
   return get_from(a,std::forward<URBG>(gen))(std::forward<URBG>(gen));
 }
 
-template<typename Tuple,typename URBG,std::size_t... I>
-Tuple tuple_get(URBG&& gen,std::index_sequence<I...>)
-{
-  return Tuple{get(
-    std::in_place_type<std::tuple_element_t<I,Tuple>>,
-    std::forward<URBG>(gen))...
-  };
-}
-
 template<typename... Ts,typename URBG>
 std::tuple<Ts...> get(
   std::in_place_type_t<std::tuple<Ts...>>,URBG&& gen)
 {
-  return tuple_get<std::tuple<Ts...>>(
-    std::forward<URBG>(gen),std::make_index_sequence<sizeof...(Ts)>{});
+  return {get(std::in_place_type<Ts>,std::forward<URBG>(gen))...};
 }
 
 int main()
