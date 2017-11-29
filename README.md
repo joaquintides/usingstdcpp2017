@@ -4,7 +4,7 @@ using std::cpp 2017
 Presentations from Joaquín Mª López Muñoz at [using std::cpp 2017](http://usingstdcpp.org/using-stdcpp-2017/)
 and associated material.
 
-* [An intro to Boost.PolyCollection](https://github.com/joaquintides/usingstdcpp2017/raw/master/An%20intro%20to%20Boost.PolyCollection/An%20intro%20Boost.PolyCollection.pdf):
+* [An intro to Boost.PolyCollection](https://github.com/joaquintides/usingstdcpp2017/raw/master/An%20intro%20to%20Boost.PolyCollection/An%20intro%20to%20Boost.PolyCollection.pdf):
 [Boost.PolyCollection](http://boost.org/libs/poly_collection) was released as part of Boost 1.65 in
 August 2017. This library implements a novel data structure for polymorphic objects that packs elements
 of the same concrete type together, which increases performance dramatically. Added speed can be squeezed
